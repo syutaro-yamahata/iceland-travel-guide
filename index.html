@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>アイスランド旅行ガイド — 卒業旅行特集</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.7;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== Color Palette ===== */
+    :root {
+      --ice-blue:   #4A90C4;
+      --aurora:     #5BB8A0;
+      --lava:       #C45A3A;
+      --gold:       #E8A838;
+      --light-bg:   #F4F8FB;
+      --mid-bg:     #EAF4F0;
+      --tag-blue:   #D6ECFA;
+      --text-dark:  #1A2B3C;
+      --text-mid:   #4A5568;
+    }
+
+    /* ===== Header ===== */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 2px solid var(--ice-blue);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      box-shadow: 0 2px 10px rgba(74,144,196,.15);
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--ice-blue), var(--aurora));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px;
+    }
+    .logo-text { font-size: 20px; font-weight: 700; color: var(--text-dark); }
+    .logo-sub { font-size: 11px; color: var(--text-mid); }
+    nav { display: flex; gap: 6px; flex-wrap: wrap; }
+    nav a {
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 13px; font-weight: 600; color: var(--text-mid);
+      transition: background .2s, color .2s;
+    }
+    nav a:hover { background: var(--tag-blue); color: var(--ice-blue); }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      height: 480px;
+      background: linear-gradient(160deg, #0D1F35 0%, #1A4A6E 40%, #2E7DA8 70%, #5BB8A0 100%);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      overflow: hidden;
+    }
+    .hero-aurora {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 30% 60%, rgba(91,184,160,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 75% 40%, rgba(132,120,220,.25) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 20% at 60% 70%, rgba(74,144,196,.2) 0%, transparent 70%);
+      animation: aurora 8s ease-in-out infinite alternate;
+    }
+    @keyframes aurora {
+      0%   { opacity: .6; transform: scaleX(1); }
+      100% { opacity: 1;  transform: scaleX(1.05); }
+    }
+    .hero-stars {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 15%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 35%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 65%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 80%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 10%, #fff 0%, transparent 100%);
+      opacity: .6;
+    }
+    .hero-content { position: relative; text-align: center; color: #fff; padding: 0 20px; }
+    .hero-badge {
+      display: inline-block; background: rgba(255,255,255,.15); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.3); border-radius: 20px;
+      padding: 4px 16px; font-size: 13px; margin-bottom: 16px; letter-spacing: .1em;
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { color: #7EECD8; }
+    .hero-sub { font-size: 16px; opacity: .85; margin-bottom: 28px; }
+    .hero-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .hero-tag {
+      background: rgba(255,255,255,.18); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,.25); border-radius: 16px;
+      padding: 5px 14px; font-size: 13px;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,.6); font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+    .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+
+    /* ===== Section Common ===== */
+    section { padding: 72px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--tag-blue); color: var(--ice-blue);
+      border-radius: 20px; padding: 4px 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: .12em;
+      margin-bottom: 12px;
+    }
+    .section-header h2 { font-size: 30px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .section-header p { color: var(--text-mid); font-size: 15px; }
+    .accent-bar {
+      width: 48px; height: 4px; border-radius: 2px; margin: 12px auto 0;
+    }
+
+    /* ===== Tab Nav ===== */
+    .tab-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+    .tab-btn {
+      padding: 8px 20px; border-radius: 24px; border: 2px solid #ddd;
+      background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all .2s; color: var(--text-mid);
+    }
+    .tab-btn.active, .tab-btn:hover { border-color: var(--ice-blue); background: var(--ice-blue); color: #fff; }
+
+    /* ===== Card Grid ===== */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .card {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.08);
+      overflow: hidden; transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.13); }
+    .card-img {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px; position: relative;
+    }
+    .card-img-label {
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(0,0,0,.55); color: #fff; border-radius: 10px;
+      padding: 2px 10px; font-size: 11px;
+    }
+    .card-body { padding: 18px 20px 20px; }
+    .card-tag {
+      display: inline-block; border-radius: 10px;
+      padding: 2px 10px; font-size: 11px; font-weight: 700; margin-bottom: 8px;
+    }
+    .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+    .card p  { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .card-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+    .card-meta span { font-size: 12px; color: var(--text-mid); display: flex; align-items: center; gap: 4px; }
+
+    /* ===== Area Section ===== */
+    .area-bg { background: var(--light-bg); }
+    .area-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+    .area-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,.07);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .area-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,.13); }
+    .area-header {
+      padding: 24px 24px 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .area-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff; flex-shrink: 0;
+    }
+    .area-header h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); }
+    .area-header p  { font-size: 12px; color: var(--text-mid); }
+    .area-spots { padding: 0 24px 20px; }
+    .area-spots ul { list-style: none; }
+    .area-spots li {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13.5px;
+    }
+    .area-spots li:last-child { border-bottom: none; }
+    .spot-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+    .spot-info strong { display: block; color: var(--text-dark); font-size: 14px; }
+    .spot-info span { color: var(--text-mid); font-size: 12px; }
+
+    /* ===== Souvenir ===== */
+    .souvenir-bg { background: var(--mid-bg); }
+    .souvenir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .sv-card {
+      background: #fff; border-radius: 16px; padding: 24px 20px; text-align: center;
+      box-shadow: 0 2px 14px rgba(0,0,0,.07);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .sv-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.12); }
+    .sv-icon { font-size: 48px; margin-bottom: 12px; }
+    .sv-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+    .sv-card p  { font-size: 12px; color: var(--text-mid); }
+    .sv-price { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+
+    /* ===== Plan ===== */
+    .plan-bg { background: #fff; }
+    .plan-tabs { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .plan-tab {
+      padding: 10px 24px; border-radius: 28px; border: 2px solid #ddd;
+      background: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+      transition: all .2s; color: var(--text-mid);
+    }
+    .plan-tab.active { border-color: var(--aurora); background: var(--aurora); color: #fff; }
+    .plan-content { display: none; }
+    .plan-content.active { display: block; }
+    .timeline { position: relative; padding-left: 40px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--ice-blue), var(--aurora));
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-dot {
+      position: absolute; left: -34px; top: 4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--ice-blue); border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--ice-blue);
+    }
+    .tl-day {
+      display: inline-block; background: var(--ice-blue); color: #fff;
+      border-radius: 12px; padding: 2px 12px; font-size: 12px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tl-card { background: var(--light-bg); border-radius: 14px; padding: 16px 20px; }
+    .tl-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .tl-card ul { list-style: none; }
+    .tl-card li { font-size: 13px; color: var(--text-mid); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .tl-card li::before { content: '→'; color: var(--aurora); font-weight: 700; }
+
+    /* ===== Info Box ===== */
+    .info-bg { background: var(--light-bg); }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .info-card {
+      background: #fff; border-radius: 16px; padding: 24px 22px;
+      box-shadow: 0 2px 14px rgba(0,0,0,.07);
+    }
+    .info-card-icon { font-size: 32px; margin-bottom: 12px; }
+    .info-card h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .info-card p, .info-card li { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+    .info-card ul { list-style: none; }
+    .info-card li::before { content: '✓ '; color: var(--aurora); font-weight: 700; }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,.7);
+      text-align: center; padding: 40px 20px;
+    }
+    footer .footer-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    footer p { font-size: 13px; }
+
+    /* ===== Utility ===== */
+    .tag-blue   { background: #D6ECFA; color: #2A7AB5; }
+    .tag-green  { background: #D4F0E8; color: #1F7A5C; }
+    .tag-orange { background: #FDE8D8; color: #B5521A; }
+    .tag-purple { background: #E8D8F5; color: #7A3AB5; }
+    .tag-gold   { background: #FDF3D0; color: #A07818; }
+    .bar-blue   { background: var(--ice-blue); }
+    .bar-green  { background: var(--aurora); }
+    .bar-orange { background: var(--lava); }
+    .bar-gold   { background: var(--gold); }
+    .bg-blue    { background: linear-gradient(135deg, #4A90C4 0%, #2E6FA8 100%); }
+    .bg-green   { background: linear-gradient(135deg, #5BB8A0 0%, #3A9A82 100%); }
+    .bg-orange  { background: linear-gradient(135deg, #C45A3A 0%, #A04020 100%); }
+    .bg-purple  { background: linear-gradient(135deg, #7A5BC4 0%, #5A3AA0 100%); }
+    .bg-teal    { background: linear-gradient(135deg, #3AAAC4 0%, #1A8AA8 100%); }
+    .bg-gold    { background: linear-gradient(135deg, #E8A838 0%, #C48818 100%); }
+    .bg-red     { background: linear-gradient(135deg, #C43A3A 0%, #A02020 100%); }
+    .price-blue   { background: #D6ECFA; color: #2A7AB5; }
+    .price-green  { background: #D4F0E8; color: #1F7A5C; }
+    .price-orange { background: #FDE8D8; color: #B5521A; }
+
+    @media (max-width: 700px) {
+      header { padding: 0 16px; }
+      nav { display: none; }
+      section { padding: 48px 16px; }
+      .hero h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🧊</div>
+    <div>
+      <div class="logo-text">アイスランド旅行ガイド</div>
+      <div class="logo-sub">Iceland Travel Guide — 卒業旅行特集</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#gourmet">グルメ</a>
+    <a href="#sightseeing">観光・遊び</a>
+    <a href="#shopping">ショッピング</a>
+    <a href="#souvenir">お土産</a>
+    <a href="#plan">旅行プラン</a>
+    <a href="#area">エリア別</a>
+    <a href="#info">旅の情報</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-aurora"></div>
+  <div class="hero-stars"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎓 卒業旅行 Special</div>
+    <h1>氷と火の国<br/><span>アイスランド</span>へ</h1>
+    <p class="hero-sub">北欧の秘境で出会う、オーロラ・間欠泉・溶岩大地の絶景</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🌌 オーロラ</span>
+      <span class="hero-tag">♨️ 温泉</span>
+      <span class="hero-tag">🌋 火山</span>
+      <span class="hero-tag">🐋 ホエールウォッチング</span>
+      <span class="hero-tag">🧊 氷河</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>スクロール</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ===== GOURMET ===== -->
+<section id="gourmet">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">🍽️ GOURMET</div>
+      <h2>グルメのおすすめスポット</h2>
+      <p>アイスランドならではの新鮮な海の幸と独自の食文化を楽しもう</p>
+      <div class="accent-bar bar-blue"></div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a4a6e,#2e7da8);">
+          🦞
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">シーフード</span>
+          <h3>Seabaron（Sægreifinn）</h3>
+          <p>地元民にも観光客にも大人気の港のロブスタースープ専門店。新鮮な海老のビスクは絶品で、レイキャビクの名物グルメ。</p>
+          <div class="card-meta">
+            <span>📍 旧港エリア</span>
+            <span>💰 約2,500円〜</span>
+            <span>⏰ 11:30〜22:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#3a6e1a,#5a9e3a);">
+          🥩
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-green">郷土料理</span>
+          <h3>Grillmarkadurinn</h3>
+          <p>アイスランド産牛肉・羊肉を使ったグリル料理が自慢。地産地消にこだわった高品質な素材が光るレストラン。特製ラム肉が看板メニュー。</p>
+          <div class="card-meta">
+            <span>📍 市内中心部</span>
+            <span>💰 約6,000円〜</span>
+            <span>⭐ 地元人気No.1</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#6e4a1a,#ae7a3a);">
+          🍦
+          <span class="card-img-label">全国</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-orange">スイーツ</span>
+          <h3>スキルアイスクリーム（Ísbúð）</h3>
+          <p>気温が低くても行列のできるアイスクリーム屋。アイスランドは世界有数のアイス消費大国。地元牧場の濃厚ミルクが贅沢な味。</p>
+          <div class="card-meta">
+            <span>📍 市内各所</span>
+            <span>💰 約600円〜</span>
+            <span>🌡️ 冬でも行列</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#4a1a6e,#7a3aae);">
+          🐟
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-purple">カフェ</span>
+          <h3>Café Loki</h3>
+          <p>ハットルグリムス教会の目の前にある伝統アイスランド料理カフェ。ライ麦パンのオープンサンド、発酵サメ肉（ハウカートル）も試せる。</p>
+          <div class="card-meta">
+            <span>📍 教会前</span>
+            <span>💰 約2,000円〜</span>
+            <span>🏛️ 観光に最適</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a6e5a,#3aae8a);">
+          🌊
+          <span class="card-img-label">全国</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-green">名物フード</span>
+          <h3>フィッシュ＆チップス</h3>
+          <p>港町で食べる揚げたてのタラのフライ。アイスランドは世界有数のタラ漁獲国で、身が厚く新鮮。ナンプレインやケチャップと合わせて。</p>
+          <div class="card-meta">
+            <span>📍 港エリア全般</span>
+            <span>💰 約1,500円〜</span>
+            <span>🎣 漁港直送</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#6e1a3a,#ae3a6a);">
+          ☕
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-orange">カフェ</span>
+          <h3>Reykjavik Roasters</h3>
+          <p>地元のコーヒー通に愛されるスペシャルティコーヒーショップ。アイスランドは一人当たりのコーヒー消費量が世界トップクラス。</p>
+          <div class="card-meta">
+            <span>📍 市内2店舗</span>
+            <span>💰 約700円〜</span>
+            <span>☕ スペシャルティ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIGHTSEEING ===== -->
+<section id="sightseeing" style="background: var(--light-bg);">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">🎯 SIGHTSEEING & ACTIVITY</div>
+      <h2>観たり遊んだりするおすすめスポット</h2>
+      <p>地球の鼓動を肌で感じる、アイスランドならではの体験</p>
+      <div class="accent-bar bar-green"></div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#0d1f35,#1a4a6e);">
+          🌌
+          <span class="card-img-label">9月〜3月</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">自然現象</span>
+          <h3>オーロラ観賞</h3>
+          <p>アイスランドはオーロラ観賞の世界最高スポットのひとつ。市内からでも見えることがあるが、郊外に出るとより美しく輝く幻想的な光のカーテン。</p>
+          <div class="card-meta">
+            <span>🗓️ 9月〜3月がベスト</span>
+            <span>🌑 新月の夜が◎</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#6e3a1a,#ae6a3a);">
+          🌋
+          <span class="card-img-label">ゴールデンサークル</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-orange">絶景スポット</span>
+          <h3>ゲイシール間欠泉</h3>
+          <p>「間欠泉」の語源となったゲイシール。隣のストロックルが5〜10分おきに高さ30mの熱湯を噴き上げる。ゴールデンサークルの必訪スポット。</p>
+          <div class="card-meta">
+            <span>📍 南西部</span>
+            <span>⏱️ 5〜10分おきに噴出</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a4a6e,#3a8ab5);">
+          💎
+          <span class="card-img-label">南海岸</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">氷河体験</span>
+          <h3>ヴァトナヨークトル氷河</h3>
+          <p>ヨーロッパ最大の氷河。氷河ハイキングツアーに参加すると、青く輝く氷の世界を歩ける。アイスケイブ（氷の洞窟）探検も人気。</p>
+          <div class="card-meta">
+            <span>📍 東部</span>
+            <span>🥾 ツアー参加必須</span>
+            <span>💰 約15,000円〜</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#2e8a6a,#3aae8a);">
+          ♨️
+          <span class="card-img-label">レイキャネス半島</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-green">リゾート</span>
+          <h3>ブルーラグーン（Blue Lagoon）</h3>
+          <p>ミルキーブルーの温泉は世界で最も美しい露天風呂のひとつ。シリカやミネラルを豊富に含み、肌にも優しい。事前予約が必須。</p>
+          <div class="card-meta">
+            <span>📍 空港近く</span>
+            <span>💰 約12,000円〜</span>
+            <span>🔖 要事前予約</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a6e,#3a5aae);">
+          🐋
+          <span class="card-img-label">フスタビーク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">アクティビティ</span>
+          <h3>ホエールウォッチング</h3>
+          <p>ミンククジラ・ザトウクジラ・シャチなど多種類が観察できる。レイキャビクや北部のアークレイリから出発するツアーが豊富。</p>
+          <div class="card-meta">
+            <span>🗓️ 4月〜10月がベスト</span>
+            <span>💰 約8,000円〜</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#3a1a1a,#6e3a3a);">
+          ⬛
+          <span class="card-img-label">南海岸</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-orange">絶景</span>
+          <h3>レイニスフィヤラ黒砂海岸</h3>
+          <p>玄武岩の柱状節理と黒い砂浜が続く神秘的なビーチ。ダイヤモンドビーチでは氷河の破片が宝石のように輝く。写真映え抜群。</p>
+          <div class="card-meta">
+            <span>📍 ヴィークの近く</span>
+            <span>⚠️ 高波に注意</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHOPPING ===== -->
+<section id="shopping">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">🛍️ SHOPPING</div>
+      <h2>ショッピングのおすすめスポット</h2>
+      <p>北欧デザインとアイスランドの伝統工芸が融合したユニークな買い物体験</p>
+      <div class="accent-bar bar-orange"></div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a3a6e,#2e5aae);">
+          🛒
+          <span class="card-img-label">レイキャビク中心部</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">ショッピングエリア</span>
+          <h3>ロイガヴェーグル通り（Laugavegur）</h3>
+          <p>レイキャビクのメインショッピングストリート。個性的な地元ブランド、ヴィンテージショップ、デザイン雑貨店が立ち並ぶ。ウィンドウショッピングだけでも楽しい。</p>
+          <div class="card-meta">
+            <span>📍 市内中心部</span>
+            <span>⏰ 10:00〜20:00頃</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#3a1a6e,#6a3aae);">
+          🏪
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-purple">モール</span>
+          <h3>コパボーグル・ショッピングセンター</h3>
+          <p>アイスランド最大級のショッピングモール。地元ブランドから国際ブランドまで揃い、雨の日の観光にも最適。フードコートも充実。</p>
+          <div class="card-meta">
+            <span>📍 市郊外</span>
+            <span>🚌 バスでアクセス可</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a6e3a,#3aae6a);">
+          🧶
+          <span class="card-img-label">全国</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-green">伝統工芸</span>
+          <h3>アイスランドウール専門店</h3>
+          <p>ロピセーター（lopapeysa）などアイスランド伝統のウール製品を扱う専門店。ハンドメイドの品質で長く使える一生ものの逸品が揃う。</p>
+          <div class="card-meta">
+            <span>💰 セーター約15,000円〜</span>
+            <span>🐑 純アイスランドウール</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#6e4a1a,#ae8a3a);">
+          🎨
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-gold">アート・雑貨</span>
+          <h3>クラフト市場＆ギャラリー</h3>
+          <p>週末に開催されるコパヴォーグルやレイキャビクのクラフト市場では、地元アーティストのハンドメイド作品が並ぶ。一点ものの宝探しに。</p>
+          <div class="card-meta">
+            <span>📅 週末開催</span>
+            <span>🎭 地元作家作品</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#1a5a6e,#3a8aae);">
+          💊
+          <span class="card-img-label">全国</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-blue">ドラッグストア</span>
+          <h3>Lyf & heilsa（薬局チェーン）</h3>
+          <p>アイスランド産の自然派スキンケア、魚油サプリ、シリカ入り化粧品など日本では手に入らないプロダクトが揃う。お土産にも人気。</p>
+          <div class="card-meta">
+            <span>📍 市内各所</span>
+            <span>🌿 オーガニック系多数</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background: linear-gradient(135deg,#6e1a4a,#ae3a8a);">
+          🍫
+          <span class="card-img-label">レイキャビク</span>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-orange">フード系</span>
+          <h3>Nói Síríus チョコレート</h3>
+          <p>アイスランドの老舗チョコレートブランド。独特の味わいで現地の人に長く愛されている。スーパーでも購入可能でお土産にも◎。</p>
+          <div class="card-meta">
+            <span>💰 約600円〜</span>
+            <span>🎁 ギフトにも最適</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOUVENIR ===== -->
+<section id="souvenir" class="souvenir-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">🎁 SOUVENIR</div>
+      <h2>人気のお土産</h2>
+      <p>アイスランドらしさが詰まった、喜ばれること間違いなしのセレクション</p>
+      <div class="accent-bar bar-gold"></div>
+    </div>
+    <div class="souvenir-grid">
+      <div class="sv-card">
+        <div class="sv-icon">🧥</div>
+        <h3>ロピセーター<br/>（lopapeysa）</h3>
+        <p>アイスランド伝統のウールセーター。独特の幾何学模様が特徴。職人手作りの一品。</p>
+        <span class="sv-price price-blue">¥15,000〜30,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🌊</div>
+        <h3>シリカ<br/>スキンケア</h3>
+        <p>ブルーラグーン由来のシリカが入ったフェイスマスク・クリーム。美肌効果で大人気。</p>
+        <span class="sv-price price-green">¥2,000〜8,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🍫</div>
+        <h3>Nói Síríus<br/>チョコレート</h3>
+        <p>アイスランドを代表するチョコブランド。独特の甘さで現地で長く愛されるソウルフード。</p>
+        <span class="sv-price price-orange">¥600〜1,500</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🧂</div>
+        <h3>溶岩塩<br/>（Lava Salt）</h3>
+        <p>アイスランドの溶岩で濾過された純粋な海塩。ミネラル豊富で料理好きへのギフトに◎。</p>
+        <span class="sv-price price-blue">¥1,500〜3,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🐟</div>
+        <h3>魚油サプリ<br/>（Omega-3）</h3>
+        <p>アイスランド産タラから作られたオメガ3サプリ。品質が高く健康志向の方に大人気。</p>
+        <span class="sv-price price-green">¥2,000〜5,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🕯️</div>
+        <h3>ライスキャンドル＆<br/>アロマ</h3>
+        <p>北欧の長い夜を彩るキャンドル文化。アイスランドの自然をモチーフにした香りが人気。</p>
+        <span class="sv-price price-orange">¥1,500〜4,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🎶</div>
+        <h3>音楽CD・<br/>グッズ（Björk等）</h3>
+        <p>ビョークをはじめ、アイスランドは音楽大国。現地アーティストのCDやグッズをお土産に。</p>
+        <span class="sv-price price-blue">¥2,000〜5,000</span>
+      </div>
+      <div class="sv-card">
+        <div class="sv-icon">🧊</div>
+        <h3>オーロラ・<br/>北欧モチーフ雑貨</h3>
+        <p>オーロラや北欧神話をモチーフにしたポストカード・マグカップ・キーホルダーなど。</p>
+        <span class="sv-price price-green">¥500〜3,000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLAN ===== -->
+<section id="plan" class="plan-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">🗺️ TRAVEL PLAN</div>
+      <h2>おすすめ旅行プラン</h2>
+      <p>日程別に最適なルートをご提案。アイスランドはリンクロード（1号線）沿いに一周するのが王道！</p>
+      <div class="accent-bar bar-blue"></div>
+    </div>
+    <div class="plan-tabs">
+      <button class="plan-tab active" onclick="switchPlan('short')">✈️ 5泊7日（最短プラン）</button>
+      <button class="plan-tab" onclick="switchPlan('medium')">🗺️ 8泊10日（充実プラン）</button>
+      <button class="plan-tab" onclick="switchPlan('full')">🌍 12泊14日（完全一周）</button>
+    </div>
+
+    <!-- 5泊7日 -->
+    <div class="plan-content active" id="plan-short">
+      <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
+        <strong style="color:var(--ice-blue);">📌 5泊7日プランの特徴</strong><br/>
+        <span style="font-size:13px;color:var(--text-mid);">ゴールデンサークルと南海岸をメインに周る定番コース。レイキャビクを拠点に日帰りツアーを組み合わせれば、アイスランドの主要スポットを効率よく巡れます。</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">1日目（到着）</div>
+          <div class="tl-card">
+            <h4>🛬 ケプラヴィーク国際空港着 → レイキャビク</h4>
+            <ul>
+              <li>空港からレイキャビクへバスまたはレンタカーで移動（約50分）</li>
+              <li>ホテルチェックイン後、ロイガヴェーグル通りを散策</li>
+              <li>夕食はSeabaronでロブスタースープ</li>
+              <li>運が良ければ夜のオーロラを市内から観賞</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--aurora)"></div>
+          <div class="tl-day">2日目</div>
+          <div class="tl-card">
+            <h4>♨️ ブルーラグーン & ゴールデンサークル</h4>
+            <ul>
+              <li>午前：ブルーラグーン（要事前予約！）で温泉リゾート体験</li>
+              <li>シンクヴェトリル国立公園（世界遺産・プレートの境界）</li>
+              <li>ゲイシール間欠泉（ストロックルが5〜10分おきに噴出）</li>
+              <li>グトルフォスの滝（別名「黄金の滝」）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--lava)"></div>
+          <div class="tl-day">3日目</div>
+          <div class="tl-card">
+            <h4>⬛ 南海岸 ドライブ</h4>
+            <ul>
+              <li>スコゥガフォス・セリャラントスフォスの滝（滝の裏側に入れる！）</li>
+              <li>レイニスフィヤラ黒砂海岸</li>
+              <li>ヴィーク村（赤い屋根の教会が絶景ポイント）</li>
+              <li>夕食は地元レストランで羊肉料理</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--gold)"></div>
+          <div class="tl-day">4日目</div>
+          <div class="tl-card">
+            <h4>🧊 ヴァトナヨークトル氷河 & ヨークルスアゥルロン氷河湖</h4>
+            <ul>
+              <li>氷河ハイキングツアーに参加（要ガイド）</li>
+              <li>ヨークルスアゥルロン氷河湖でアイスバーグを間近に観察</li>
+              <li>ダイヤモンドビーチ（黒砂浜に光る氷のかけら）</li>
+              <li>宿泊：ホフン（近くのロブスタータウンで夕食）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">5日目</div>
+          <div class="tl-card">
+            <h4>🛍️ レイキャビク 観光 & ショッピング</h4>
+            <ul>
+              <li>ハットルグリムス教会（エレベーターで展望台へ）</li>
+              <li>国立博物館でアイスランドの歴史を学ぶ</li>
+              <li>ロイガヴェーグル通りでお土産ショッピング</li>
+              <li>最後の夜は奮発してグリルマーカズルで豪華ディナー</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--aurora)"></div>
+          <div class="tl-day">6〜7日目</div>
+          <div class="tl-card">
+            <h4>✈️ 帰国</h4>
+            <ul>
+              <li>空港へ移動・免税手続き</li>
+              <li>空港内のデューティーフリーで最後のお土産購入</li>
+              <li>出発フライト → 乗り継ぎ → 帰国</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8泊10日 -->
+    <div class="plan-content" id="plan-medium">
+      <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
+        <strong style="color:var(--aurora);">📌 8泊10日プランの特徴</strong><br/>
+        <span style="font-size:13px;color:var(--text-mid);">南部・東部・北部まで足を延ばし、アイスランドの多様な表情を体験。ウェストフィヨルドへの小旅行も組み込んだ充実プラン。</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">1〜2日目</div>
+          <div class="tl-card">
+            <h4>🏙️ レイキャビク & ゴールデンサークル</h4>
+            <ul>
+              <li>市内観光：ハットルグリムス教会・旧港・国立博物館</li>
+              <li>ゴールデンサークル（シンクヴェトリル・ゲイシール・グトルフォス）</li>
+              <li>ブルーラグーン温泉</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--aurora)"></div>
+          <div class="tl-day">3〜4日目</div>
+          <div class="tl-card">
+            <h4>🌊 南海岸 ドライブ</h4>
+            <ul>
+              <li>セリャラントスフォス・スコゥガフォスの滝</li>
+              <li>黒砂海岸・ヴィーク村</li>
+              <li>ヴァトナヨークトル氷河 氷河ハイキング</li>
+              <li>ヨークルスアゥルロン氷河湖・ダイヤモンドビーチ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--lava)"></div>
+          <div class="tl-day">5〜6日目</div>
+          <div class="tl-card">
+            <h4>🏔️ 北部 アークレイリ周辺</h4>
+            <ul>
+              <li>アークレイリ市内観光（アイスランド第2の都市）</li>
+              <li>ミーヴァトン湖周辺（ミーヴァトン温泉・擬似噴火口）</li>
+              <li>デティフォスの滝（ヨーロッパ最大の水量）</li>
+              <li>ホエールウォッチング（フサヴィーク発）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--gold)"></div>
+          <div class="tl-day">7〜8日目</div>
+          <div class="tl-card">
+            <h4>🦅 ウェストフィヨルド & 西部</h4>
+            <ul>
+              <li>ラウトラビャルグ（ヨーロッパ最西端の断崖・パフィン生息地）</li>
+              <li>ディンヤンジ滝（「神々の滝」）</li>
+              <li>スナイフェルスネス半島（映画「名探偵コナン」的な風景）</li>
+              <li>スナイフェルスヨークトル氷河（ジュール・ヴェルヌの小説舞台）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">9〜10日目</div>
+          <div class="tl-card">
+            <h4>✈️ レイキャビク → 帰国</h4>
+            <ul>
+              <li>最終日ショッピング・市場巡り</li>
+              <li>空港へ移動・出国手続き</li>
+              <li>帰国フライト</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12泊14日 -->
+    <div class="plan-content" id="plan-full">
+      <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
+        <strong style="color:var(--lava);">📌 12泊14日 完全一周プランの特徴</strong><br/>
+        <span style="font-size:13px;color:var(--text-mid);">リンクロード（1号線）を時計回りに一周するアイスランド制覇プラン。内陸ハイランドにも足を踏み入れる究極の旅。レンタカー必須。</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">1〜2日目</div>
+          <div class="tl-card">
+            <h4>🏙️ レイキャビク & レイキャネス半島</h4>
+            <ul>
+              <li>市内観光・ブルーラグーン</li>
+              <li>ゴールデンサークル一周</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--aurora)"></div>
+          <div class="tl-day">3〜5日目</div>
+          <div class="tl-card">
+            <h4>🌊 南海岸 完全制覇</h4>
+            <ul>
+              <li>滝めぐり（セリャラントスフォス・スコゥガフォス）</li>
+              <li>黒砂海岸・ヴィーク</li>
+              <li>氷河ハイキング・氷河湖・ダイヤモンドビーチ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--lava)"></div>
+          <div class="tl-day">6〜7日目</div>
+          <div class="tl-card">
+            <h4>🏔️ 東フィヨルド</h4>
+            <ul>
+              <li>エイイルスタジル（東部の中心都市）</li>
+              <li>東フィヨルドの曲がりくねった絶景ドライブ</li>
+              <li>セイジスフィヨルズル（カラフルな建物の港町）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--gold)"></div>
+          <div class="tl-day">8〜9日目</div>
+          <div class="tl-card">
+            <h4>🌋 北部 ミーヴァトン・アークレイリ</h4>
+            <ul>
+              <li>デティフォスの滝・ゴーザフォスの滝</li>
+              <li>ミーヴァトン湖・クラフラ火山</li>
+              <li>ホエールウォッチング（フサヴィーク）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ice-blue)"></div>
+          <div class="tl-day">10〜11日目</div>
+          <div class="tl-card">
+            <h4>🦅 ウェストフィヨルド & スナイフェルスネス</h4>
+            <ul>
+              <li>ラウトラビャルグ断崖・パフィン観察</li>
+              <li>スナイフェルスネス半島（氷河・溶岩原）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--aurora)"></div>
+          <div class="tl-day">12〜13日目</div>
+          <div class="tl-card">
+            <h4>🏔️ 内陸ハイランド（7〜9月限定）</h4>
+            <ul>
+              <li>ランドマンナロイガル（カラフルな山々・温泉）</li>
+              <li>ソースモルク渓谷（ハイキングの聖地）</li>
+              <li>4WD必須・要事前確認</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--lava)"></div>
+          <div class="tl-day">14日目</div>
+          <div class="tl-card">
+            <h4>✈️ 帰国</h4>
+            <ul>
+              <li>レイキャビク最終日・ショッピング</li>
+              <li>ケプラヴィーク空港から帰国便</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AREA ===== -->
+<section id="area" class="area-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">📍 AREA GUIDE</div>
+      <h2>エリア別 観光地まとめ</h2>
+      <p>アイスランドを7つのエリアに分けて徹底ガイド。それぞれに異なる魅力がある！</p>
+      <div class="accent-bar bar-blue"></div>
+    </div>
+    <div class="area-grid">
+      <!-- Area 1 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-blue">1</div>
+          <div>
+            <h3>レイキャビク & 首都圏</h3>
+            <p>Reykjavik & Capital Region</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🏛️</span>
+              <div class="spot-info"><strong>ハットルグリムス教会</strong><span>アイスランドで最も有名な教会・展望台</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🎨</span>
+              <div class="spot-info"><strong>ハルパコンサートホール</strong><span>ガラスのファサードが美しい文化施設</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🦈</span>
+              <div class="spot-info"><strong>発酵サメ肉体験</strong><span>世界一臭い食べ物に挑戦！</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🛍️</span>
+              <div class="spot-info"><strong>ロイガヴェーグル通り</strong><span>ショッピング・カフェ巡りに最適</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 2 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-green">2</div>
+          <div>
+            <h3>南西部 & ゴールデンサークル</h3>
+            <p>Southwest & Golden Circle</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🌿</span>
+              <div class="spot-info"><strong>シンクヴェトリル国立公園</strong><span>世界遺産・プレートの境界で潜水も可能</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">💦</span>
+              <div class="spot-info"><strong>ゲイシール間欠泉</strong><span>30mの熱湯が5〜10分おきに噴出</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🌊</span>
+              <div class="spot-info"><strong>グトルフォスの滝</strong><span>二段に落ちる「黄金の滝」</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">♨️</span>
+              <div class="spot-info"><strong>ブルーラグーン</strong><span>ミルキーブルーの世界最高温泉</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 3 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-orange">3</div>
+          <div>
+            <h3>南部海岸</h3>
+            <p>South Coast</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🌊</span>
+              <div class="spot-info"><strong>セリャラントスフォス</strong><span>滝の裏側を歩ける神秘的な滝</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">⬛</span>
+              <div class="spot-info"><strong>レイニスフィヤラ黒砂海岸</strong><span>玄武岩柱と黒砂が織りなす絶景</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🧊</span>
+              <div class="spot-info"><strong>ヨークルスアゥルロン氷河湖</strong><span>青い氷山が浮かぶ幻想的な湖</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">💎</span>
+              <div class="spot-info"><strong>ダイヤモンドビーチ</strong><span>黒砂に輝く氷のかけら</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 4 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-purple">4</div>
+          <div>
+            <h3>東フィヨルド</h3>
+            <p>East Fjords</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🏘️</span>
+              <div class="spot-info"><strong>セイジスフィヨルズル</strong><span>カラフルな建物と静かな港の絵本のような町</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🏔️</span>
+              <div class="spot-info"><strong>絶景フィヨルドドライブ</strong><span>曲がりくねった道と深いフィヨルドの絶景</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🐦</span>
+              <div class="spot-info"><strong>野生動物観察</strong><span>アザラシ・キツネ・鳥類が多く生息</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🌿</span>
+              <div class="spot-info"><strong>エイイルスタジル</strong><span>東部の中心都市・宿泊・補給の拠点</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 5 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-teal">5</div>
+          <div>
+            <h3>北部</h3>
+            <p>North Iceland</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🌋</span>
+              <div class="spot-info"><strong>ミーヴァトン湖</strong><span>火山地帯の神秘的な湖・擬似噴火口</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">💦</span>
+              <div class="spot-info"><strong>デティフォスの滝</strong><span>ヨーロッパ最大の水量を誇る豪快な滝</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🐋</span>
+              <div class="spot-info"><strong>フサヴィーク</strong><span>「ホエールウォッチングの首都」</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🏙️</span>
+              <div class="spot-info"><strong>アークレイリ</strong><span>アイスランド第2の都市・北部の拠点</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 6 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-gold">6</div>
+          <div>
+            <h3>ウェストフィヨルド</h3>
+            <p>Westfjords</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🦅</span>
+              <div class="spot-info"><strong>ラウトラビャルグ断崖</strong><span>ヨーロッパ最西端・パフィンの巣</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🌊</span>
+              <div class="spot-info"><strong>ディンヤンジ滝</strong><span>「神々の滝」と呼ばれる落差100mの滝</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🦊</span>
+              <div class="spot-info"><strong>アークティックフォックス</strong><span>アイスランドの固有動物に会えるチャンス</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🚗</span>
+              <div class="spot-info"><strong>手付かずの自然</strong><span>観光客が少なく秘境感たっぷり</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Area 7 -->
+      <div class="area-card">
+        <div class="area-header">
+          <div class="area-num bg-green">7</div>
+          <div>
+            <h3>西部 & スナイフェルスネス</h3>
+            <p>West & Snæfellsnes</p>
+          </div>
+        </div>
+        <div class="area-spots">
+          <ul>
+            <li>
+              <span class="spot-icon">🧊</span>
+              <div class="spot-info"><strong>スナイフェルスヨークトル</strong><span>ジュール・ヴェルヌ「地底旅行」の舞台</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🌋</span>
+              <div class="spot-info"><strong>溶岩原と海岸線</strong><span>多様な地形が凝縮したミニチュアアイスランド</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🐦</span>
+              <div class="spot-info"><strong>パフィン観察</strong><span>愛くるしい海鳥パフィンに会える</span></div>
+            </li>
+            <li>
+              <span class="spot-icon">🏖️</span>
+              <div class="spot-info"><strong>キルキュバーヤルクロイストゥル</strong><span>美しいビーチと緑の絶景</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRAVEL INFO ===== -->
+<section id="info" class="info-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">ℹ️ TRAVEL INFO</div>
+      <h2>旅の基本情報</h2>
+      <p>アイスランド旅行を成功させるための必須知識</p>
+      <div class="accent-bar bar-blue"></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon">✈️</div>
+        <h3>アクセス</h3>
+        <ul>
+          <li>日本からの直行便はなし</li>
+          <li>ロンドン・コペンハーゲン・フランクフルト等で乗継ぎ</li>
+          <li>所要時間：約16〜20時間</li>
+          <li>ケプラヴィーク国際空港（KEF）着</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">💱</div>
+        <h3>通貨・費用</h3>
+        <ul>
+          <li>通貨：アイスランド・クローナ（ISK）</li>
+          <li>クレジットカードが使える場所がほとんど</li>
+          <li>物価は日本の約2〜3倍が目安</li>
+          <li>1日の予算：約15,000〜30,000円</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🌤️</div>
+        <h3>ベストシーズン</h3>
+        <ul>
+          <li>夏（6〜8月）：白夜・緑の大地・全道路開通</li>
+          <li>冬（12〜2月）：オーロラ・極地の雰囲気</li>
+          <li>春秋（4・5・9・10月）：比較的空いていてコスパ◎</li>
+          <li>内陸は7〜9月のみアクセス可能</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🚗</div>
+        <h3>移動手段</h3>
+        <ul>
+          <li>レンタカーが最も自由に動ける（要国際免許）</li>
+          <li>リンクロード（1号線）は年中走行可能</li>
+          <li>バスパスも利用可（ストリートバス）</li>
+          <li>冬期は4WD・スタッドレス必須</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🏨</div>
+        <h3>宿泊</h3>
+        <ul>
+          <li>農場ホテル・ゲストハウス・キャンプ場など多彩</li>
+          <li>夏はキャンプ場が格安でおすすめ</li>
+          <li>人気スポット近くは早めに予約を</li>
+          <li>ゲストハウス：約8,000〜15,000円/泊</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">👕</div>
+        <h3>服装・持ち物</h3>
+        <ul>
+          <li>天気が変わりやすいので重ね着が基本</li>
+          <li>防水ジャケットは必携</li>
+          <li>夏でも防寒具を忘れずに</li>
+          <li>日焼け止め（夏の白夜で紫外線が強い）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">🧊 アイスランド旅行ガイド</div>
+  <p>Iceland Travel Guide — 卒業旅行特集</p>
+  <p style="margin-top:8px; font-size:12px; opacity:.5;">※掲載情報は参考です。最新情報は現地または公式サイトでご確認ください。</p>
+</footer>
+
+<script>
+  function switchPlan(id) {
+    document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.plan-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('plan-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
