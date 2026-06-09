@@ -4,10 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>アイスランド旅行ガイド — 卒業旅行特集</title>
+
   <style>
-    /* ===== Reset & Base ===== */
+
+    /* =====================================================
+       1. リセット & 基本設定
+          全要素の余白をゼロにし、フォント・背景色を設定
+    ===================================================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; } /* ナビクリック時にスムーズスクロール */
     body {
       font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
       background: #fff;
@@ -17,22 +22,31 @@
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
-    /* ===== Color Palette ===== */
+
+    /* =====================================================
+       2. カラーパレット（CSS変数）
+          サイト全体で使う色をここで一元管理
+          変更したい色はここだけ直せばOK
+    ===================================================== */
     :root {
-      --ice-blue:   #4A90C4;
-      --aurora:     #5BB8A0;
-      --lava:       #C45A3A;
-      --gold:       #E8A838;
-      --light-bg:   #F4F8FB;
-      --mid-bg:     #EAF4F0;
-      --tag-blue:   #D6ECFA;
-      --text-dark:  #1A2B3C;
-      --text-mid:   #4A5568;
+      --ice-blue:   #4A90C4; /* メインカラー：氷のブルー */
+      --aurora:     #5BB8A0; /* サブカラー：オーロラグリーン */
+      --lava:       #C45A3A; /* アクセント：溶岩オレンジ */
+      --gold:       #E8A838; /* アクセント：ゴールド */
+      --light-bg:   #F4F8FB; /* セクション背景（薄いブルー） */
+      --mid-bg:     #EAF4F0; /* セクション背景（薄いグリーン） */
+      --tag-blue:   #D6ECFA; /* タグの背景色 */
+      --text-dark:  #1A2B3C; /* 見出し文字色 */
+      --text-mid:   #4A5568; /* 本文文字色 */
     }
 
-    /* ===== Header ===== */
+
+    /* =====================================================
+       3. ヘッダー（ページ上部のナビゲーション）
+          スクロールしても常に上部に固定される
+    ===================================================== */
     header {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky; top: 0; z-index: 100; /* 他の要素より前面に表示 */
       background: #fff;
       border-bottom: 2px solid var(--ice-blue);
       display: flex; align-items: center; justify-content: space-between;
@@ -49,15 +63,21 @@
     }
     .logo-text { font-size: 20px; font-weight: 700; color: var(--text-dark); }
     .logo-sub { font-size: 11px; color: var(--text-mid); }
+
+    /* ナビリンク（グルメ・観光など） */
     nav { display: flex; gap: 6px; flex-wrap: wrap; }
     nav a {
       padding: 6px 14px; border-radius: 20px;
       font-size: 13px; font-weight: 600; color: var(--text-mid);
-      transition: background .2s, color .2s;
+      transition: background .2s, color .2s; /* ホバー時にアニメーション */
     }
     nav a:hover { background: var(--tag-blue); color: var(--ice-blue); }
 
-    /* ===== Hero ===== */
+
+    /* =====================================================
+       4. ヒーローセクション（トップのメインビジュアル）
+          オーロラアニメーション・星・山のシルエット
+    ===================================================== */
     .hero {
       position: relative;
       height: 480px;
@@ -65,6 +85,8 @@
       display: flex; align-items: center; justify-content: center; flex-direction: column;
       overflow: hidden;
     }
+
+    /* オーロラのアニメーション（ゆっくり揺れる光） */
     .hero-aurora {
       position: absolute; inset: 0;
       background:
@@ -77,6 +99,8 @@
       0%   { opacity: .6; transform: scaleX(1); }
       100% { opacity: 1;  transform: scaleX(1.05); }
     }
+
+    /* 背景の星（点状の白い点） */
     .hero-stars {
       position: absolute; inset: 0;
       background-image:
@@ -89,6 +113,8 @@
         radial-gradient(1px 1px at 90% 10%, #fff 0%, transparent 100%);
       opacity: .6;
     }
+
+    /* ヒーローのテキスト */
     .hero-content { position: relative; text-align: center; color: #fff; padding: 0 20px; }
     .hero-badge {
       display: inline-block; background: rgba(255,255,255,.15); backdrop-filter: blur(6px);
@@ -96,26 +122,43 @@
       padding: 4px 16px; font-size: 13px; margin-bottom: 16px; letter-spacing: .1em;
     }
     .hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
-    .hero h1 span { color: #7EECD8; }
+    .hero h1 span { color: #7EECD8; } /* タイトルのアクセント色 */
     .hero-sub { font-size: 16px; opacity: .85; margin-bottom: 28px; }
+
+    /* タグ一覧（オーロラ・温泉・火山など） */
     .hero-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     .hero-tag {
       background: rgba(255,255,255,.18); backdrop-filter: blur(4px);
       border: 1px solid rgba(255,255,255,.25); border-radius: 16px;
       padding: 5px 14px; font-size: 13px;
     }
+
+    /* スクロール促進の矢印アニメーション */
     .hero-scroll {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
       color: rgba(255,255,255,.6); font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px;
       animation: bounce 2s infinite;
     }
-    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
-    .scroll-arrow { width: 20px; height: 20px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(6px); }
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+    }
 
-    /* ===== Section Common ===== */
+
+    /* =====================================================
+       5. セクション共通スタイル
+          各コンテンツセクションの見出し・ラベルの共通デザイン
+    ===================================================== */
     section { padding: 72px 40px; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-inner { max-width: 1100px; margin: 0 auto; } /* 中央寄せの最大幅 */
     .section-header { text-align: center; margin-bottom: 48px; }
+
+    /* 「GOURMET」などの小さいラベル */
     .section-label {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--tag-blue); color: var(--ice-blue);
@@ -124,28 +167,26 @@
       margin-bottom: 12px;
     }
     .section-header h2 { font-size: 30px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
-    .section-header p { color: var(--text-mid); font-size: 15px; }
-    .accent-bar {
-      width: 48px; height: 4px; border-radius: 2px; margin: 12px auto 0;
-    }
+    .section-header p  { color: var(--text-mid); font-size: 15px; }
 
-    /* ===== Tab Nav ===== */
-    .tab-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
-    .tab-btn {
-      padding: 8px 20px; border-radius: 24px; border: 2px solid #ddd;
-      background: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
-      transition: all .2s; color: var(--text-mid);
-    }
-    .tab-btn.active, .tab-btn:hover { border-color: var(--ice-blue); background: var(--ice-blue); color: #fff; }
+    /* 見出し下のカラーライン */
+    .accent-bar { width: 48px; height: 4px; border-radius: 2px; margin: 12px auto 0; }
 
-    /* ===== Card Grid ===== */
+
+    /* =====================================================
+       6. カードグリッド（グルメ・観光・ショッピングで共通使用）
+          3列グリッドで並ぶカードのスタイル
+    ===================================================== */
     .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
     .card {
       background: #fff; border-radius: 16px;
       box-shadow: 0 2px 16px rgba(0,0,0,.08);
       overflow: hidden; transition: transform .25s, box-shadow .25s;
     }
+    /* ホバーで少し浮き上がるエフェクト */
     .card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.13); }
+
+    /* カード上部の絵文字エリア */
     .card-img {
       height: 180px;
       display: flex; align-items: center; justify-content: center;
@@ -156,6 +197,8 @@
       background: rgba(0,0,0,.55); color: #fff; border-radius: 10px;
       padding: 2px 10px; font-size: 11px;
     }
+
+    /* カード本文エリア */
     .card-body { padding: 18px 20px 20px; }
     .card-tag {
       display: inline-block; border-radius: 10px;
@@ -163,10 +206,16 @@
     }
     .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
     .card p  { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+
+    /* 場所・価格・時間などのメタ情報 */
     .card-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
     .card-meta span { font-size: 12px; color: var(--text-mid); display: flex; align-items: center; gap: 4px; }
 
-    /* ===== Area Section ===== */
+
+    /* =====================================================
+       7. エリアカード（エリア別観光ガイド用）
+          丸付き番号 + スポットリスト形式のカード
+    ===================================================== */
     .area-bg { background: var(--light-bg); }
     .area-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
     .area-card {
@@ -175,6 +224,8 @@
       transition: transform .25s, box-shadow .25s;
     }
     .area-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,.13); }
+
+    /* エリア番号 + タイトル */
     .area-header {
       padding: 24px 24px 16px;
       display: flex; align-items: center; gap: 14px;
@@ -186,6 +237,8 @@
     }
     .area-header h3 { font-size: 18px; font-weight: 800; color: var(--text-dark); }
     .area-header p  { font-size: 12px; color: var(--text-mid); }
+
+    /* スポット一覧（絵文字 + 名前 + 説明） */
     .area-spots { padding: 0 24px 20px; }
     .area-spots ul { list-style: none; }
     .area-spots li {
@@ -195,9 +248,13 @@
     .area-spots li:last-child { border-bottom: none; }
     .spot-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
     .spot-info strong { display: block; color: var(--text-dark); font-size: 14px; }
-    .spot-info span { color: var(--text-mid); font-size: 12px; }
+    .spot-info span   { color: var(--text-mid); font-size: 12px; }
 
-    /* ===== Souvenir ===== */
+
+    /* =====================================================
+       8. お土産カード
+          中央揃えの絵文字 + 名前 + 価格バッジ
+    ===================================================== */
     .souvenir-bg { background: var(--mid-bg); }
     .souvenir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
     .sv-card {
@@ -206,13 +263,22 @@
       transition: transform .2s, box-shadow .2s;
     }
     .sv-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.12); }
-    .sv-icon { font-size: 48px; margin-bottom: 12px; }
+    .sv-icon  { font-size: 48px; margin-bottom: 12px; }
     .sv-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
     .sv-card p  { font-size: 12px; color: var(--text-mid); }
-    .sv-price { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+    .sv-price {
+      display: inline-block; margin-top: 10px; padding: 3px 12px;
+      border-radius: 12px; font-size: 12px; font-weight: 700;
+    }
 
-    /* ===== Plan ===== */
+
+    /* =====================================================
+       9. 旅行プラン（タイムライン + タブ切替）
+          タブで「5泊7日 / 8泊10日 / 12泊14日」を切替
+    ===================================================== */
     .plan-bg { background: #fff; }
+
+    /* タブボタン（アクティブ時にグリーンで塗りつぶし） */
     .plan-tabs { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
     .plan-tab {
       padding: 10px 24px; border-radius: 28px; border: 2px solid #ddd;
@@ -220,8 +286,12 @@
       transition: all .2s; color: var(--text-mid);
     }
     .plan-tab.active { border-color: var(--aurora); background: var(--aurora); color: #fff; }
-    .plan-content { display: none; }
+
+    /* タブコンテンツの表示切替 */
+    .plan-content        { display: none; }
     .plan-content.active { display: block; }
+
+    /* タイムライン（縦線 + 丸ドット） */
     .timeline { position: relative; padding-left: 40px; }
     .timeline::before {
       content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
@@ -234,18 +304,29 @@
       background: var(--ice-blue); border: 3px solid #fff;
       box-shadow: 0 0 0 2px var(--ice-blue);
     }
+
+    /* 日付バッジ */
     .tl-day {
       display: inline-block; background: var(--ice-blue); color: #fff;
       border-radius: 12px; padding: 2px 12px; font-size: 12px; font-weight: 700;
       margin-bottom: 8px;
     }
+
+    /* 各日のコンテンツカード */
     .tl-card { background: var(--light-bg); border-radius: 14px; padding: 16px 20px; }
     .tl-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
     .tl-card ul { list-style: none; }
-    .tl-card li { font-size: 13px; color: var(--text-mid); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+    .tl-card li {
+      font-size: 13px; color: var(--text-mid); padding: 3px 0;
+      display: flex; align-items: center; gap: 6px;
+    }
     .tl-card li::before { content: '→'; color: var(--aurora); font-weight: 700; }
 
-    /* ===== Info Box ===== */
+
+    /* =====================================================
+       10. 旅の基本情報カード
+           アクセス・通貨・気候・宿泊などの情報グリッド
+    ===================================================== */
     .info-bg { background: var(--light-bg); }
     .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
     .info-card {
@@ -253,12 +334,15 @@
       box-shadow: 0 2px 14px rgba(0,0,0,.07);
     }
     .info-card-icon { font-size: 32px; margin-bottom: 12px; }
-    .info-card h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .info-card h3   { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
     .info-card p, .info-card li { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
-    .info-card ul { list-style: none; }
+    .info-card ul   { list-style: none; }
     .info-card li::before { content: '✓ '; color: var(--aurora); font-weight: 700; }
 
-    /* ===== Footer ===== */
+
+    /* =====================================================
+       11. フッター
+    ===================================================== */
     footer {
       background: var(--text-dark); color: rgba(255,255,255,.7);
       text-align: center; padding: 40px 20px;
@@ -266,16 +350,25 @@
     footer .footer-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
     footer p { font-size: 13px; }
 
-    /* ===== Utility ===== */
+
+    /* =====================================================
+       12. ユーティリティクラス（色の組み合わせ）
+           タグ・アクセントバー・エリア番号の背景色
+    ===================================================== */
+    /* タグの色 */
     .tag-blue   { background: #D6ECFA; color: #2A7AB5; }
     .tag-green  { background: #D4F0E8; color: #1F7A5C; }
     .tag-orange { background: #FDE8D8; color: #B5521A; }
     .tag-purple { background: #E8D8F5; color: #7A3AB5; }
     .tag-gold   { background: #FDF3D0; color: #A07818; }
+
+    /* アクセントバーの色 */
     .bar-blue   { background: var(--ice-blue); }
     .bar-green  { background: var(--aurora); }
     .bar-orange { background: var(--lava); }
     .bar-gold   { background: var(--gold); }
+
+    /* エリア番号の背景グラデーション */
     .bg-blue    { background: linear-gradient(135deg, #4A90C4 0%, #2E6FA8 100%); }
     .bg-green   { background: linear-gradient(135deg, #5BB8A0 0%, #3A9A82 100%); }
     .bg-orange  { background: linear-gradient(135deg, #C45A3A 0%, #A04020 100%); }
@@ -283,21 +376,32 @@
     .bg-teal    { background: linear-gradient(135deg, #3AAAC4 0%, #1A8AA8 100%); }
     .bg-gold    { background: linear-gradient(135deg, #E8A838 0%, #C48818 100%); }
     .bg-red     { background: linear-gradient(135deg, #C43A3A 0%, #A02020 100%); }
+
+    /* お土産価格バッジの色 */
     .price-blue   { background: #D6ECFA; color: #2A7AB5; }
     .price-green  { background: #D4F0E8; color: #1F7A5C; }
     .price-orange { background: #FDE8D8; color: #B5521A; }
 
+
+    /* =====================================================
+       13. レスポンシブ（スマホ対応）
+           700px以下でナビを非表示・余白を縮小
+    ===================================================== */
     @media (max-width: 700px) {
       header { padding: 0 16px; }
-      nav { display: none; }
+      nav    { display: none; }       /* スマホではナビ非表示 */
       section { padding: 48px 16px; }
       .hero h1 { font-size: 32px; }
     }
+
   </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- =====================================================
+     ヘッダー
+     ロゴ + ナビゲーションリンク（全セクションへのリンク）
+===================================================== -->
 <header>
   <div class="logo">
     <div class="logo-icon">🧊</div>
@@ -317,14 +421,19 @@
   </nav>
 </header>
 
-<!-- ===== HERO ===== -->
+
+<!-- =====================================================
+     ヒーローセクション
+     オーロラ背景 + タイトル + タグ一覧
+===================================================== -->
 <div class="hero">
-  <div class="hero-aurora"></div>
-  <div class="hero-stars"></div>
+  <div class="hero-aurora"></div>  <!-- オーロラのアニメーション背景 -->
+  <div class="hero-stars"></div>   <!-- 星の背景 -->
   <div class="hero-content">
     <div class="hero-badge">🎓 卒業旅行 Special</div>
     <h1>氷と火の国<br/><span>アイスランド</span>へ</h1>
     <p class="hero-sub">北欧の秘境で出会う、オーロラ・間欠泉・溶岩大地の絶景</p>
+    <!-- キーワードタグ -->
     <div class="hero-tags">
       <span class="hero-tag">🌌 オーロラ</span>
       <span class="hero-tag">♨️ 温泉</span>
@@ -333,13 +442,18 @@
       <span class="hero-tag">🧊 氷河</span>
     </div>
   </div>
+  <!-- スクロール促進の矢印 -->
   <div class="hero-scroll">
     <span>スクロール</span>
     <div class="scroll-arrow"></div>
   </div>
 </div>
 
-<!-- ===== GOURMET ===== -->
+
+<!-- =====================================================
+     グルメセクション
+     おすすめレストラン・カフェを6枚のカードで紹介
+===================================================== -->
 <section id="gourmet">
   <div class="section-inner">
     <div class="section-header">
@@ -348,7 +462,10 @@
       <p>アイスランドならではの新鮮な海の幸と独自の食文化を楽しもう</p>
       <div class="accent-bar bar-blue"></div>
     </div>
+
     <div class="card-grid">
+
+      <!-- カード1: ロブスタースープ -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a4a6e,#2e7da8);">
           🦞
@@ -365,6 +482,8 @@
           </div>
         </div>
       </div>
+
+      <!-- カード2: ラム肉グリル -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#3a6e1a,#5a9e3a);">
           🥩
@@ -381,6 +500,8 @@
           </div>
         </div>
       </div>
+
+      <!-- カード3: アイスクリーム -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#6e4a1a,#ae7a3a);">
           🍦
@@ -397,6 +518,8 @@
           </div>
         </div>
       </div>
+
+      <!-- カード4: 伝統カフェ -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#4a1a6e,#7a3aae);">
           🐟
@@ -413,6 +536,8 @@
           </div>
         </div>
       </div>
+
+      <!-- カード5: フィッシュ＆チップス -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a6e5a,#3aae8a);">
           🌊
@@ -429,6 +554,8 @@
           </div>
         </div>
       </div>
+
+      <!-- カード6: スペシャルティコーヒー -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#6e1a3a,#ae3a6a);">
           ☕
@@ -445,11 +572,16 @@
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /.card-grid -->
   </div>
 </section>
 
-<!-- ===== SIGHTSEEING ===== -->
+
+<!-- =====================================================
+     観光・遊びセクション
+     オーロラ・間欠泉・氷河など6つの体験スポット
+===================================================== -->
 <section id="sightseeing" style="background: var(--light-bg);">
   <div class="section-inner">
     <div class="section-header">
@@ -458,7 +590,10 @@
       <p>地球の鼓動を肌で感じる、アイスランドならではの体験</p>
       <div class="accent-bar bar-green"></div>
     </div>
+
     <div class="card-grid">
+
+      <!-- オーロラ -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#0d1f35,#1a4a6e);">
           🌌
@@ -474,6 +609,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 間欠泉 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#6e3a1a,#ae6a3a);">
           🌋
@@ -489,6 +626,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 氷河 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a4a6e,#3a8ab5);">
           💎
@@ -505,6 +644,8 @@
           </div>
         </div>
       </div>
+
+      <!-- ブルーラグーン -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#2e8a6a,#3aae8a);">
           ♨️
@@ -521,6 +662,8 @@
           </div>
         </div>
       </div>
+
+      <!-- ホエールウォッチング -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a3a6e,#3a5aae);">
           🐋
@@ -536,6 +679,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 黒砂海岸 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#3a1a1a,#6e3a3a);">
           ⬛
@@ -551,11 +696,16 @@
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /.card-grid -->
   </div>
 </section>
 
-<!-- ===== SHOPPING ===== -->
+
+<!-- =====================================================
+     ショッピングセクション
+     レイキャビクの街歩きショッピングスポット6選
+===================================================== -->
 <section id="shopping">
   <div class="section-inner">
     <div class="section-header">
@@ -564,7 +714,10 @@
       <p>北欧デザインとアイスランドの伝統工芸が融合したユニークな買い物体験</p>
       <div class="accent-bar bar-orange"></div>
     </div>
+
     <div class="card-grid">
+
+      <!-- ロイガヴェーグル通り -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a3a6e,#2e5aae);">
           🛒
@@ -580,6 +733,8 @@
           </div>
         </div>
       </div>
+
+      <!-- ショッピングモール -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#3a1a6e,#6a3aae);">
           🏪
@@ -595,6 +750,8 @@
           </div>
         </div>
       </div>
+
+      <!-- ウール専門店 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a6e3a,#3aae6a);">
           🧶
@@ -610,6 +767,8 @@
           </div>
         </div>
       </div>
+
+      <!-- クラフト市場 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#6e4a1a,#ae8a3a);">
           🎨
@@ -625,6 +784,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 薬局 -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#1a5a6e,#3a8aae);">
           💊
@@ -640,6 +801,8 @@
           </div>
         </div>
       </div>
+
+      <!-- チョコレート -->
       <div class="card">
         <div class="card-img" style="background: linear-gradient(135deg,#6e1a4a,#ae3a8a);">
           🍫
@@ -655,11 +818,16 @@
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /.card-grid -->
   </div>
 </section>
 
-<!-- ===== SOUVENIR ===== -->
+
+<!-- =====================================================
+     お土産セクション
+     人気お土産8品を価格付きで紹介
+===================================================== -->
 <section id="souvenir" class="souvenir-bg">
   <div class="section-inner">
     <div class="section-header">
@@ -668,6 +836,7 @@
       <p>アイスランドらしさが詰まった、喜ばれること間違いなしのセレクション</p>
       <div class="accent-bar bar-gold"></div>
     </div>
+
     <div class="souvenir-grid">
       <div class="sv-card">
         <div class="sv-icon">🧥</div>
@@ -717,11 +886,15 @@
         <p>オーロラや北欧神話をモチーフにしたポストカード・マグカップ・キーホルダーなど。</p>
         <span class="sv-price price-green">¥500〜3,000</span>
       </div>
-    </div>
+    </div><!-- /.souvenir-grid -->
   </div>
 </section>
 
-<!-- ===== PLAN ===== -->
+
+<!-- =====================================================
+     旅行プランセクション
+     タブで3つのプラン（5泊7日/8泊10日/12泊14日）を切替
+===================================================== -->
 <section id="plan" class="plan-bg">
   <div class="section-inner">
     <div class="section-header">
@@ -730,13 +903,15 @@
       <p>日程別に最適なルートをご提案。アイスランドはリンクロード（1号線）沿いに一周するのが王道！</p>
       <div class="accent-bar bar-blue"></div>
     </div>
+
+    <!-- タブボタン（クリックでプランを切替） -->
     <div class="plan-tabs">
       <button class="plan-tab active" onclick="switchPlan('short')">✈️ 5泊7日（最短プラン）</button>
       <button class="plan-tab" onclick="switchPlan('medium')">🗺️ 8泊10日（充実プラン）</button>
       <button class="plan-tab" onclick="switchPlan('full')">🌍 12泊14日（完全一周）</button>
     </div>
 
-    <!-- 5泊7日 -->
+    <!-- ===== 5泊7日プラン ===== -->
     <div class="plan-content active" id="plan-short">
       <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
         <strong style="color:var(--ice-blue);">📌 5泊7日プランの特徴</strong><br/>
@@ -821,9 +996,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /#plan-short -->
 
-    <!-- 8泊10日 -->
+    <!-- ===== 8泊10日プラン ===== -->
     <div class="plan-content" id="plan-medium">
       <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
         <strong style="color:var(--aurora);">📌 8泊10日プランの特徴</strong><br/>
@@ -894,9 +1069,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /#plan-medium -->
 
-    <!-- 12泊14日 -->
+    <!-- ===== 12泊14日プラン ===== -->
     <div class="plan-content" id="plan-full">
       <div style="background: var(--light-bg); border-radius:16px; padding:20px 24px; margin-bottom:28px;">
         <strong style="color:var(--lava);">📌 12泊14日 完全一周プランの特徴</strong><br/>
@@ -985,11 +1160,16 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /#plan-full -->
+
   </div>
 </section>
 
-<!-- ===== AREA ===== -->
+
+<!-- =====================================================
+     エリア別セクション
+     アイスランドを7エリアに分けて観光地をまとめて紹介
+===================================================== -->
 <section id="area" class="area-bg">
   <div class="section-inner">
     <div class="section-header">
@@ -998,8 +1178,10 @@
       <p>アイスランドを7つのエリアに分けて徹底ガイド。それぞれに異なる魅力がある！</p>
       <div class="accent-bar bar-blue"></div>
     </div>
+
     <div class="area-grid">
-      <!-- Area 1 -->
+
+      <!-- エリア1: レイキャビク -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-blue">1</div>
@@ -1010,26 +1192,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🏛️</span>
-              <div class="spot-info"><strong>ハットルグリムス教会</strong><span>アイスランドで最も有名な教会・展望台</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🎨</span>
-              <div class="spot-info"><strong>ハルパコンサートホール</strong><span>ガラスのファサードが美しい文化施設</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🦈</span>
-              <div class="spot-info"><strong>発酵サメ肉体験</strong><span>世界一臭い食べ物に挑戦！</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🛍️</span>
-              <div class="spot-info"><strong>ロイガヴェーグル通り</strong><span>ショッピング・カフェ巡りに最適</span></div>
-            </li>
+            <li><span class="spot-icon">🏛️</span><div class="spot-info"><strong>ハットルグリムス教会</strong><span>アイスランドで最も有名な教会・展望台</span></div></li>
+            <li><span class="spot-icon">🎨</span><div class="spot-info"><strong>ハルパコンサートホール</strong><span>ガラスのファサードが美しい文化施設</span></div></li>
+            <li><span class="spot-icon">🦈</span><div class="spot-info"><strong>発酵サメ肉体験</strong><span>世界一臭い食べ物に挑戦！</span></div></li>
+            <li><span class="spot-icon">🛍️</span><div class="spot-info"><strong>ロイガヴェーグル通り</strong><span>ショッピング・カフェ巡りに最適</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 2 -->
+
+      <!-- エリア2: ゴールデンサークル -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-green">2</div>
@@ -1040,26 +1211,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🌿</span>
-              <div class="spot-info"><strong>シンクヴェトリル国立公園</strong><span>世界遺産・プレートの境界で潜水も可能</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">💦</span>
-              <div class="spot-info"><strong>ゲイシール間欠泉</strong><span>30mの熱湯が5〜10分おきに噴出</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🌊</span>
-              <div class="spot-info"><strong>グトルフォスの滝</strong><span>二段に落ちる「黄金の滝」</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">♨️</span>
-              <div class="spot-info"><strong>ブルーラグーン</strong><span>ミルキーブルーの世界最高温泉</span></div>
-            </li>
+            <li><span class="spot-icon">🌿</span><div class="spot-info"><strong>シンクヴェトリル国立公園</strong><span>世界遺産・プレートの境界で潜水も可能</span></div></li>
+            <li><span class="spot-icon">💦</span><div class="spot-info"><strong>ゲイシール間欠泉</strong><span>30mの熱湯が5〜10分おきに噴出</span></div></li>
+            <li><span class="spot-icon">🌊</span><div class="spot-info"><strong>グトルフォスの滝</strong><span>二段に落ちる「黄金の滝」</span></div></li>
+            <li><span class="spot-icon">♨️</span><div class="spot-info"><strong>ブルーラグーン</strong><span>ミルキーブルーの世界最高温泉</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 3 -->
+
+      <!-- エリア3: 南部海岸 -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-orange">3</div>
@@ -1070,26 +1230,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🌊</span>
-              <div class="spot-info"><strong>セリャラントスフォス</strong><span>滝の裏側を歩ける神秘的な滝</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">⬛</span>
-              <div class="spot-info"><strong>レイニスフィヤラ黒砂海岸</strong><span>玄武岩柱と黒砂が織りなす絶景</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🧊</span>
-              <div class="spot-info"><strong>ヨークルスアゥルロン氷河湖</strong><span>青い氷山が浮かぶ幻想的な湖</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">💎</span>
-              <div class="spot-info"><strong>ダイヤモンドビーチ</strong><span>黒砂に輝く氷のかけら</span></div>
-            </li>
+            <li><span class="spot-icon">🌊</span><div class="spot-info"><strong>セリャラントスフォス</strong><span>滝の裏側を歩ける神秘的な滝</span></div></li>
+            <li><span class="spot-icon">⬛</span><div class="spot-info"><strong>レイニスフィヤラ黒砂海岸</strong><span>玄武岩柱と黒砂が織りなす絶景</span></div></li>
+            <li><span class="spot-icon">🧊</span><div class="spot-info"><strong>ヨークルスアゥルロン氷河湖</strong><span>青い氷山が浮かぶ幻想的な湖</span></div></li>
+            <li><span class="spot-icon">💎</span><div class="spot-info"><strong>ダイヤモンドビーチ</strong><span>黒砂に輝く氷のかけら</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 4 -->
+
+      <!-- エリア4: 東フィヨルド -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-purple">4</div>
@@ -1100,26 +1249,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🏘️</span>
-              <div class="spot-info"><strong>セイジスフィヨルズル</strong><span>カラフルな建物と静かな港の絵本のような町</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🏔️</span>
-              <div class="spot-info"><strong>絶景フィヨルドドライブ</strong><span>曲がりくねった道と深いフィヨルドの絶景</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🐦</span>
-              <div class="spot-info"><strong>野生動物観察</strong><span>アザラシ・キツネ・鳥類が多く生息</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🌿</span>
-              <div class="spot-info"><strong>エイイルスタジル</strong><span>東部の中心都市・宿泊・補給の拠点</span></div>
-            </li>
+            <li><span class="spot-icon">🏘️</span><div class="spot-info"><strong>セイジスフィヨルズル</strong><span>カラフルな建物と静かな港の絵本のような町</span></div></li>
+            <li><span class="spot-icon">🏔️</span><div class="spot-info"><strong>絶景フィヨルドドライブ</strong><span>曲がりくねった道と深いフィヨルドの絶景</span></div></li>
+            <li><span class="spot-icon">🐦</span><div class="spot-info"><strong>野生動物観察</strong><span>アザラシ・キツネ・鳥類が多く生息</span></div></li>
+            <li><span class="spot-icon">🌿</span><div class="spot-info"><strong>エイイルスタジル</strong><span>東部の中心都市・宿泊・補給の拠点</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 5 -->
+
+      <!-- エリア5: 北部 -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-teal">5</div>
@@ -1130,26 +1268,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🌋</span>
-              <div class="spot-info"><strong>ミーヴァトン湖</strong><span>火山地帯の神秘的な湖・擬似噴火口</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">💦</span>
-              <div class="spot-info"><strong>デティフォスの滝</strong><span>ヨーロッパ最大の水量を誇る豪快な滝</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🐋</span>
-              <div class="spot-info"><strong>フサヴィーク</strong><span>「ホエールウォッチングの首都」</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🏙️</span>
-              <div class="spot-info"><strong>アークレイリ</strong><span>アイスランド第2の都市・北部の拠点</span></div>
-            </li>
+            <li><span class="spot-icon">🌋</span><div class="spot-info"><strong>ミーヴァトン湖</strong><span>火山地帯の神秘的な湖・擬似噴火口</span></div></li>
+            <li><span class="spot-icon">💦</span><div class="spot-info"><strong>デティフォスの滝</strong><span>ヨーロッパ最大の水量を誇る豪快な滝</span></div></li>
+            <li><span class="spot-icon">🐋</span><div class="spot-info"><strong>フサヴィーク</strong><span>「ホエールウォッチングの首都」</span></div></li>
+            <li><span class="spot-icon">🏙️</span><div class="spot-info"><strong>アークレイリ</strong><span>アイスランド第2の都市・北部の拠点</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 6 -->
+
+      <!-- エリア6: ウェストフィヨルド -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-gold">6</div>
@@ -1160,26 +1287,15 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🦅</span>
-              <div class="spot-info"><strong>ラウトラビャルグ断崖</strong><span>ヨーロッパ最西端・パフィンの巣</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🌊</span>
-              <div class="spot-info"><strong>ディンヤンジ滝</strong><span>「神々の滝」と呼ばれる落差100mの滝</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🦊</span>
-              <div class="spot-info"><strong>アークティックフォックス</strong><span>アイスランドの固有動物に会えるチャンス</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🚗</span>
-              <div class="spot-info"><strong>手付かずの自然</strong><span>観光客が少なく秘境感たっぷり</span></div>
-            </li>
+            <li><span class="spot-icon">🦅</span><div class="spot-info"><strong>ラウトラビャルグ断崖</strong><span>ヨーロッパ最西端・パフィンの巣</span></div></li>
+            <li><span class="spot-icon">🌊</span><div class="spot-info"><strong>ディンヤンジ滝</strong><span>「神々の滝」と呼ばれる落差100mの滝</span></div></li>
+            <li><span class="spot-icon">🦊</span><div class="spot-info"><strong>アークティックフォックス</strong><span>アイスランドの固有動物に会えるチャンス</span></div></li>
+            <li><span class="spot-icon">🚗</span><div class="spot-info"><strong>手付かずの自然</strong><span>観光客が少なく秘境感たっぷり</span></div></li>
           </ul>
         </div>
       </div>
-      <!-- Area 7 -->
+
+      <!-- エリア7: 西部・スナイフェルスネス -->
       <div class="area-card">
         <div class="area-header">
           <div class="area-num bg-green">7</div>
@@ -1190,30 +1306,23 @@
         </div>
         <div class="area-spots">
           <ul>
-            <li>
-              <span class="spot-icon">🧊</span>
-              <div class="spot-info"><strong>スナイフェルスヨークトル</strong><span>ジュール・ヴェルヌ「地底旅行」の舞台</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🌋</span>
-              <div class="spot-info"><strong>溶岩原と海岸線</strong><span>多様な地形が凝縮したミニチュアアイスランド</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🐦</span>
-              <div class="spot-info"><strong>パフィン観察</strong><span>愛くるしい海鳥パフィンに会える</span></div>
-            </li>
-            <li>
-              <span class="spot-icon">🏖️</span>
-              <div class="spot-info"><strong>キルキュバーヤルクロイストゥル</strong><span>美しいビーチと緑の絶景</span></div>
-            </li>
+            <li><span class="spot-icon">🧊</span><div class="spot-info"><strong>スナイフェルスヨークトル</strong><span>ジュール・ヴェルヌ「地底旅行」の舞台</span></div></li>
+            <li><span class="spot-icon">🌋</span><div class="spot-info"><strong>溶岩原と海岸線</strong><span>多様な地形が凝縮したミニチュアアイスランド</span></div></li>
+            <li><span class="spot-icon">🐦</span><div class="spot-info"><strong>パフィン観察</strong><span>愛くるしい海鳥パフィンに会える</span></div></li>
+            <li><span class="spot-icon">🏖️</span><div class="spot-info"><strong>キルキュバーヤルクロイストゥル</strong><span>美しいビーチと緑の絶景</span></div></li>
           </ul>
         </div>
       </div>
-    </div>
+
+    </div><!-- /.area-grid -->
   </div>
 </section>
 
-<!-- ===== TRAVEL INFO ===== -->
+
+<!-- =====================================================
+     旅の基本情報セクション
+     アクセス・通貨・ベストシーズン・移動・宿泊・服装
+===================================================== -->
 <section id="info" class="info-bg">
   <div class="section-inner">
     <div class="section-header">
@@ -1222,6 +1331,7 @@
       <p>アイスランド旅行を成功させるための必須知識</p>
       <div class="accent-bar bar-blue"></div>
     </div>
+
     <div class="info-grid">
       <div class="info-card">
         <div class="info-card-icon">✈️</div>
@@ -1283,24 +1393,43 @@
           <li>日焼け止め（夏の白夜で紫外線が強い）</li>
         </ul>
       </div>
-    </div>
+    </div><!-- /.info-grid -->
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+
+<!-- =====================================================
+     フッター
+===================================================== -->
 <footer>
   <div class="footer-logo">🧊 アイスランド旅行ガイド</div>
   <p>Iceland Travel Guide — 卒業旅行特集</p>
   <p style="margin-top:8px; font-size:12px; opacity:.5;">※掲載情報は参考です。最新情報は現地または公式サイトでご確認ください。</p>
 </footer>
 
+
+<!-- =====================================================
+     JavaScript
+     タブ切替ロジック（旅行プランセクションで使用）
+===================================================== -->
 <script>
+  /**
+   * switchPlan(id)
+   * タブボタンを押したときに呼ばれる関数
+   * - すべてのタブ・コンテンツから active クラスを外す
+   * - クリックされたタブとそのコンテンツに active を付ける
+   */
   function switchPlan(id) {
+    // すべてのコンテンツを非表示にする
     document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+    // すべてのタブボタンをリセット
     document.querySelectorAll('.plan-tab').forEach(el => el.classList.remove('active'));
+    // 選択されたプランを表示
     document.getElementById('plan-' + id).classList.add('active');
+    // クリックされたボタンをアクティブ状態に
     event.target.classList.add('active');
   }
 </script>
+
 </body>
 </html>
